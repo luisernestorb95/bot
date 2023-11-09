@@ -58,7 +58,7 @@ Channel_Id = -1001843472207
 bot = Client("bot",api_id=api_id,api_hash=api_hash,bot_token=bot_token)
 boss = ['luisernesto95']#usuarios supremos
 
-Configs = {"uclv":'',"ia":"","uvs":"","ltu":"","uccfd":"","vcl":"",
+Configs = {"uclv":'',"gtm":"","uvs":"","ltu":"","uccfd":"","vcl":"",
 			"ucuser": "", "ucpass":"","uclv_p":"", "gp":None, "s":"On", 
 			'luisernesto95': {'z': 99,"m":"e","a":"c","t":"y","gp":False},
 			
@@ -226,8 +226,8 @@ async def uvs_ucm(client: Client, message: Message):
 	await send_config()
 	await send("?? Nube uvs_ucm Activada ??")
 
-@bot.on_message(filters.command("aula_ia", prefixes="/")& filters.private)
-async def aula_ia(client: Client, message: Message):
+@bot.on_message(filters.command("aula_gtm", prefixes="/")& filters.private)
+async def aula_gtm(client: Client, message: Message):
 	username = message.from_user.username
 	send = message.reply
 	try:await get_messages()
@@ -241,9 +241,9 @@ async def aula_ia(client: Client, message: Message):
 	else:pass
 	Configs[username]["m"] = "u"
 	Configs[username]["a"] = "h"
-	Configs[username]["z"] = 99
+	Configs[username]["z"] = 7
 	await send_config()
-	await send("?? Nube ia Activada ??")
+	await send("?? Nube gtm Activada ??")
 
 @bot.on_message(filters.command("uvs_ltu", prefixes="/")& filters.private)
 async def uvs_ltu(client: Client, message: Message):
@@ -519,7 +519,7 @@ async def zips(client: Client, message: Message):
 	else:pass
 	if username in boss:
 		sip = message.text.split(" ")[1]
-		Configs["ia"] = sip
+		Configs["gtm"] = sip
 		await send_config()
 		await send("? Operacion Realizada ?")
 	else:return
@@ -1447,7 +1447,7 @@ async def users(client: Client, message: Message):
 		message = "**Usuarios: **"+ str(total)+'\n\n'
 		for user in Configs:
 			if user == "uclv":continue
-			if user == "ia":continue
+			if user == "gtm":continue
 			if user == "uvs":continue
 			if user == "ltu":continue
 			if user == "vcl":continue
@@ -2298,8 +2298,8 @@ async def uploadfile(file,usid,msg,username):
 		token = Configs["uclv"]
 		connector = aiohttp.TCPConnector()
 	elif mode == "h":
-		moodle = "https://ia.mined.gob.cu/"
-		token = Configs["ia"]
+		moodle = "https://aulauvs.gtm.sld.cu"
+		token = Configs["gtm"]
 		if proxy == "":
 			connector = aiohttp.TCPConnector()
 		else:
@@ -2368,7 +2368,7 @@ async def uploadfile(file,usid,msg,username):
 			await msg.edit("????? ?????? ??????.?????? ?????? ???????? ???? ???????????? ?????? ?????????????? ?? 249 ????")
 			return
 	elif mode == "h":
-		if int(zips) > 99:
+		if int(zips) > 7:
 			await msg.edit("????? ?????? ????????.?????? ?????? ???????? ???? ???????????? ?????? ?????????????? ?? 7 ????")
 			return
 	elif mode == "v":
