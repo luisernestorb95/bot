@@ -60,8 +60,7 @@ boss = ['luisernesto95']#usuarios supremos
 
 Configs = {"uclv":'',"gtm":"","uvs":"","ltu":"","uccfd":"","vcl":"",
 			"ucuser": "", "ucpass":"","uclv_p":"", "gp":None, "s":"On", 
-			'luisernesto95': {'z': 99,"m":"e","a":"c","t":"y","gp":False},
-			
+			'luisernesto95': {'z': 99,"m":"e","a":"c","t":"y","gp":False}}
 
 Urls = {} #urls subidos a educa
 Urls_draft = {} #urls para borrar de draft
@@ -82,7 +81,7 @@ async def start(client: Client, message: Message):
 	except:await send_config()
 	if comprobacion_de_user(username) == False:
 		intento_msg = "@" + username + " ??Intento usarme sin su permiso??"
-		await send("?? No puede usarme contacte a mi Propietario.????\n https://t.me/luisernesto95\n De momento voy a decirle q usted intento usarme sin su permiso\n")
+		await send("?? No puede usarme contacte a mi Propietario.????\n https://t.me/Maykol0102\n De momento voy a decirle q usted intento usarme sin su permiso\n")
 		await bot.send_message(chat_id='1272221782', text=intento_msg)
 		await bot.send_message(chat_id=message.chat.id, text=mensaje, reply_markup=reply_markup)
 		return
@@ -563,57 +562,6 @@ async def zips(client: Client, message: Message):
 		await send_config()
 		await send("? Operacion Realizada ?")
 	else:return
-
-async def get_token(host,user,passw,connector,msg):
-	async with aiohttp.ClientSession(connector=connector) as session:
-		try:
-			url = f"{host}login/token.php?service=moodle_mobile_app&username={user}&password={passw}"
-			async with session.get(url) as resp:
-				html = await resp.text()
-			data = loads(html)
-			if "token" in html:
-				token = data["token"]
-				m = f"?? **HOST:** `{host}`\n"
-				m+= f"?? **USER:** `{user}`\n"
-				m+= f"?? **PASSW:** `{passw}`\n"
-				m+= f"?? **TOKEN:** `{token}`"
-				await msg.edit(m)
-			elif "error" in html:
-				await msg.edit("?? Esta nube no permite token")
-			return
-		except:
-			await msg.edit("**?? Ocurrió un error, intente agregar un proxy usando el comando /proxy o verifique los datos (host, usuario y contraseña) ingresados**")
-			return
-
-@bot.on_message(filters.command("get_token", prefixes="/")& filters.private)
-async def get2_token(client: Client, message: Message):
-	username = message.from_user.username
-	try:await get_messages()
-	except:await send_config()
-	if comprobacion_de_user(username) == False:
-		intento_msg = "@" + username + " ??Intento usarme sin su permiso??"
-		await send("?? No puede usarme contacte a mi Propietario.????\n https://t.me/Pro_Slayerr\n De momento voy a decirle q usted intento usarme sin su permiso\n")
-		await bot.send_message(chat_id=message.chat.id, text=mensaje, reply_markup=reply_markup)
-		return
-	else:
-		msg = await bot.send_message(username,"?? __Extrayendo Token [...]__")
-		lista = message.text.split(' ')
-		if len(lista)!=4:
-			await msg.edit("?? Error en el comando /get_token\n\n? Foma correcta:\n/get_token host user passw")
-			return
-		host = lista[1]
-		user = lista[2]
-		passw = lista[3]
-		try:
-			proxy = Configs[username]["gp"]
-		except:
-			proxy = DB_global['Proxy_Global']
-		if proxy:
-			connector = aiohttp_socks.ProxyConnector.from_url(f"{proxy}")
-		else:
-			connector = aiohttp.TCPConnector()
-		token = await get_token(host,user,passw,connector,msg)
-		return
 
 @bot.on_message(filters.command("token_vcl", prefixes="/")& filters.private)
 async def zips(client: Client, message: Message):
@@ -2903,12 +2851,6 @@ async def proccess(filex,user_id,msg,username):
             	
             	      	
          	
-try:
-	os.unlink("bot.session")
-except:pass
-try:
-	os.unlink("bot.session-journal")
-except:pass
 
 print("started")
 bot.start()
